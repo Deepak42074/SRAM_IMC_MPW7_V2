@@ -21,8 +21,10 @@
     // Assume default net type to be wire because GL netlists don't have the wire definitions
     `default_nettype wire
     `include "gl/user_project_wrapper.v"
-    `include "gl/user_proj_example.v"
+    `include "gl/top.v"
+    `include "gl/Integrated_bitcell_with_dummy_cells.v"
 `else
     `include "user_project_wrapper.v"
-    `include "user_proj_example.v"
+    `include "top.v"
+    `include "Integrated_bitcell_with_dummy_cells.v"
 `endif

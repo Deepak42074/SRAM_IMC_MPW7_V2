@@ -81,7 +81,36 @@ module user_project_wrapper #(
 /*--------------------------------------*/
 /* User project is instantiated  here   */
 /*--------------------------------------*/
+SRAM_Wrapper_top SRAM_IMC_TOP(
 
+//.vccd1(vccd1),	// User area 1 1.8V power
+//.vssd1(vssd1),	// User area 1 digital ground
+
+.clk(wb_clk_i),					//Common clock
+.reset_n(wb_rst_i),					//wb_rst_i	
+.wbs_we_i(wbs_we_i) ,					//wbs_we_i=0 for read ;wbs_we_i=1 for write		
+.wishbone_buffer_data_in(wbs_dat_i), 			//wbs_dat_i
+.wishbone_rw_addr(wbs_adr_i),				//wishbone_addr
+.wishbone_databus_out(wbs_dat_o),	 		//wbs_dat_o
+.VCLP(analog_io[11]),					// connect to Analog IO
+.EN(analog_io[12]),					// connect to Analog IO
+.Iref0(analog_io[7]),					// connect to Analog IO
+.Iref1(analog_io[8]),					// connect to Analog IO
+.Iref2(analog_io[9]),					// connect to Analog IO
+.Iref3(analog_io[10]),					// connect to Analog IO
+
+.EN_VCLP(la_data_out[120]),				//Deepak_28/11/22: needs to be passed to analog DUT for EN & VCLP enable
+//.VDD(vccd2),
+//.VSS(vssd2)						//currently taking out to LA
+); 
+
+endmodule	
+// user_project_wrapper instantiation ends
+
+
+
+//---------------------------------------------------------------------
+/*
 user_proj_example mprj (
 `ifdef USE_POWER_PINS
 	.vccd1(vccd1),	// User area 1 1.8V power
@@ -117,7 +146,7 @@ user_proj_example mprj (
     // IRQ
     .irq(user_irq)
 );
-
-endmodule	// user_project_wrapper
+*/
+//---------------------------------------------------------------------------------
 
 `default_nettype wire
